@@ -3,12 +3,8 @@ import "./index.css";
 import { Layout } from "../Layout";
 import { Home } from "../../pages/Home";
 
-export function App() {
-  return (
-    <Layout>
-      <Home />
-    </Layout>
-  );
-}
-
-export default App;
+export const App = () => (
+  <Layout>
+    <Home />
+  </Layout>
+);
