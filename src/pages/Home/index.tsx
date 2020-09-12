@@ -1,11 +1,13 @@
 import React from "react";
 
+import MovieService from "../../services/MovieService";
+
 export function Home() {
+  const moviesData =  MovieService.getMovies();
+
   return (
     <div className="container">
-      <div className="d-flex flex-row justify-content-center pt-5">
-        HOME
-      </div>
+      
     </div>
   );
 }
