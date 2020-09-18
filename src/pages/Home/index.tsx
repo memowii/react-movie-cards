@@ -19,7 +19,7 @@ export const Home: React.FC = () => {
         title={m1.title}
         subtitle={m1.subtitle}
         description={m1.description}
-        rating={m1.rating}
+        rating={3.5}
       />
     </div>
   );

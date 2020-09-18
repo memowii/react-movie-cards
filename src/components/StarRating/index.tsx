@@ -1,33 +1,61 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faDivide,
   faStar as fullFaStar,
   faStarHalfAlt,
+  IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar as outlineFaStar } from "@fortawesome/free-regular-svg-icons";
-
-import { numberToStringFloat } from "../../utils/numberToStringFloat";
 
 interface StarRatingProps {
   rating: number;
 }
 
-export const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
-  return (
-    <div className="StarRating">
-      <FontAwesomeIcon icon={fullFaStar} size="2x" />
-      <FontAwesomeIcon icon={fullFaStar} size="2x" />
-      <FontAwesomeIcon icon={fullFaStar} size="2x" />
-      <FontAwesomeIcon icon={faStarHalfAlt} size="2x" />
-      <FontAwesomeIcon icon={outlineFaStar} size="2x" />
-    </div>
-  );
+let idx: number = 0;
+
+export const StarRating: React.FC<StarRatingProps> = ({ rating }) => (
+  <div className="StarRating">{renderStars(rating)}</div>
+);
+
+const figureStarsForm = (n: number): [number, number, number] => {
+  const numOfFilledStars = Math.round(n);
+  const decimalPart = Math.abs(numOfFilledStars - n);
+  const numOfHalfStars = decimalPart >= 0.5 ? 1 : 0;
+  const numOfEmptyStars = 5 - numOfFilledStars - numOfHalfStars;
+
+  return [numOfFilledStars, numOfHalfStars, numOfEmptyStars];
 };
 
-const figureStarsForm = (n: string): [number, boolean] => {
-  const [wholePart, decimalPart] = n.split(".");
-  const numOfStars = parseInt(wholePart);
-  const shouldAddNewStar = parseInt(decimalPart[0]) > 5 ? true : false;
+const renderStar = (
+  n: number,
+  FAIcon: IconDefinition
+): React.ReactElement[] => {
+  return new Array(n).fill(1).map(() => {
+    return (
+      <Fragment key={idx++}>
+        {<FontAwesomeIcon icon={FAIcon} size="lg" />}
+        {/* This is another solution {React.cloneElement(Icon, { key: '1'})} */}
+      </Fragment>
+    );
+  });
 
-  return [numOfStars, shouldAddNewStar];
+  // Alternative way to make it work.
+  // return new Array(n).fill(1).map((_, i) => (<div key={i}> {Icon} </div>));
+};
+
+const renderStars = (rating: number): React.ReactElement => {
+  const [numOfFilledStars, numOfHalfStars, numOfEmptyStars] = figureStarsForm(
+    rating
+  );
+
+  return (
+    <>
+      {renderStar(numOfFilledStars, fullFaStar)}
+
+      {renderStar(numOfHalfStars, faStarHalfAlt)}
+
+      {renderStar(numOfEmptyStars, outlineFaStar)}
+    </>
+  );
 };

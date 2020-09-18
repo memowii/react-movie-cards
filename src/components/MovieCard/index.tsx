@@ -30,7 +30,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({
       <div className="d-flex align-items-center justify-content-between px-2">
         <StarRating rating={rating} />
         <span className="badge badge-pill badge-primary">
-          <h5 className="mb-0">{rating}</h5>
+          <h6 className="mb-0">{rating}</h6>
         </span>
       </div>
     </div>
