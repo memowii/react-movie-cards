@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faDivide,
   faStar as fullFaStar,
   faStarHalfAlt,
   IconDefinition,
@@ -18,11 +17,11 @@ export const StarRating: React.FC<StarRatingProps> = ({ rating }) => (
   <div className="StarRating">{renderStars(rating)}</div>
 );
 
-const figureStarsForm = (n: number): [number, number, number] => {
-  const numOfFilledStars = Math.round(n);
-  const decimalPart = Math.abs(numOfFilledStars - n);
-  const numOfHalfStars = decimalPart >= 0.5 ? 1 : 0;
-  const numOfEmptyStars = 5 - numOfFilledStars - numOfHalfStars;
+export const figureStarsForm = (n: number): [number, number, number] => {
+  const numOfFilledStars: number = Math.floor(n);
+  const decimalPart: number = Math.abs(numOfFilledStars - n);
+  const numOfHalfStars: number = decimalPart >= 0.5 ? 1 : 0;
+  const numOfEmptyStars: number = 5 - numOfFilledStars - numOfHalfStars;
 
   return [numOfFilledStars, numOfHalfStars, numOfEmptyStars];
 };

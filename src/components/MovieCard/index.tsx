@@ -1,6 +1,8 @@
+import { IncomingMessage } from "http";
 import React from "react";
 
 import { StarRating } from "./../StarRating";
+import "./index.css";
 
 interface MovieCardProps {
   src: string;
@@ -19,7 +21,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({
   description,
   rating,
 }) => (
-  <div className="card">
+  <div className="MovieCard card">
     <img src={src} className="card-img-top" alt={alt} />
     <div className="card-body">
       <h5 className="card-title">{title}</h5>
