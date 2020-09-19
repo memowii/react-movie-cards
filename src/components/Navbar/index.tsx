@@ -2,6 +2,8 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilm } from "@fortawesome/free-solid-svg-icons";
 
+import "./index.css";
+
 export const Navbar = () => (
   <nav className="navbar navbar-dark bg-dark py-3">
     <div className="container">
