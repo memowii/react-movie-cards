@@ -16,7 +16,7 @@ export const Home: React.FC = () => {
   return (
     <div className="container my-4">
       <div className="row">
-        <div className="col-3 py-4">
+        <div className="col-12 col-md-6 col-lg-4 col-xl-3 py-4">
           <MovieCard
             src={m1Img}
             alt={movies[0].title}
@@ -26,7 +26,7 @@ export const Home: React.FC = () => {
             rating={4.5}
           />
         </div>
-        <div className="col-3 py-4">
+        <div className="col-12 col-md-6 col-lg-4 col-xl-3 py-4">
           <MovieCard
             src={m2Img}
             alt={movies[1].title}
@@ -36,7 +36,7 @@ export const Home: React.FC = () => {
             rating={movies[1].rating}
           />
         </div>
-        <div className="col-3 py-4">
+        <div className="col-12 col-md-6 col-lg-4 col-xl-3 py-4">
           <MovieCard
             src={m3Img}
             alt={movies[2].title}
@@ -46,7 +46,7 @@ export const Home: React.FC = () => {
             rating={movies[2].rating}
           />
         </div>
-        <div className="col-3 py-4">
+        <div className="col-12 col-md-6 col-lg-4 col-xl-3 py-4">
           <MovieCard
             src={m4Img}
             alt={movies[3].title}
@@ -56,7 +56,7 @@ export const Home: React.FC = () => {
             rating={movies[3].rating}
           />
         </div>
-        <div className="col-3 py-4">
+        <div className="col-12 col-md-6 col-lg-4 col-xl-3 py-4">
           <MovieCard
             src={m5Img}
             alt={movies[3].title}
