@@ -11,7 +11,7 @@ import m4Img from "../../images/Appleseed_Alpha.jpg";
 import m5Img from "../../images/Resident_Evil_Vendetta.jpg";
 
 export const Home: React.FC = () => {
-  const [movies, setMovies] = useState<Movie[]>(MovieService.getMovies);
+  const [movies, setMovies] = useState<Movie[]>(MovieService.getMovies());
 
   return (
     <div className="container my-4">
