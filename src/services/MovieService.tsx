@@ -20,14 +20,15 @@ class LocalMovieService extends MovieService {
 class ExternalMovieService extends MovieService {
   constructor(movies: Movie[] | any[]) {
     super(movies);
+    this.movies = this.changeMoviesForm(this.movies);
   }
 
   getMovies(): Movie[] {
     return this.movies ? this.movies : [];
   }
 
-  private changeMoviesForm(): Movie[] {
-    const movies: Movie[] = (this.movies as any[]).map((movie: any) => ({
+  private changeMoviesForm(movies: any[]): Movie[] {
+    return (this.movies as any[]).map((movie: any) => ({
       id: movie.imdbID,
       title: movie.Title,
       subtitle: movie.Title,
@@ -36,8 +37,6 @@ class ExternalMovieService extends MovieService {
       imageUrl: movie.Poster,
       rating: movie.imdbRating,
     }));
-
-    return movies;
   }
 }
 
