@@ -1,6 +1,8 @@
 import localMovies from "./movies.json";
 import externalMovies from "./imdbMoviesFromAPI.json";
 import { Movie } from "../interfaces/Movie";
+import { chunk } from "lodash";
+
 abstract class MovieService {
   constructor(public movies: Movie[] | any[]) {}
 
@@ -38,10 +40,37 @@ class ExternalMovieService extends MovieService {
       rating: movie.imdbRating,
     }));
   }
+
+  getMoviesIterator(itemsPerPage: number) {
+    const dividedMovies = chunk(this.movies, itemsPerPage);
+
+    const iterator = {
+      from: 0,
+      to: dividedMovies.length - 1,
+
+      [Symbol.iterator]() {
+        this.current = this.from;
+        return this;
+      },
+
+      next() {
+        if (this.current <= this.to) {
+          return { done: false, value: dividedMovies[this.current++] };
+        } else {
+          return { done: true };
+        }
+      },
+    } as any;
+
+    return iterator[Symbol.iterator]();
+  }
 }
 
 const localMoviesService = new LocalMovieService(localMovies);
 const externalMoviesService = new ExternalMovieService(externalMovies as any[]);
-console.log("externalMoviesService", externalMoviesService.getMovies());
+const moviesIterator = externalMoviesService.getMoviesIterator(8);
+
+console.log(moviesIterator.next());
+console.log(moviesIterator.next());
 
 export default localMoviesService;
