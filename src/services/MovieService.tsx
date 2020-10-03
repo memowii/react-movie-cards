@@ -68,9 +68,6 @@ class ExternalMovieService extends MovieService {
 
 const localMoviesService = new LocalMovieService(localMovies);
 const externalMoviesService = new ExternalMovieService(externalMovies as any[]);
-const moviesIterator = externalMoviesService.getMoviesIterator(8);
+// const moviesIterator = externalMoviesService.getMoviesIterator(8);
 
-console.log(moviesIterator.next());
-console.log(moviesIterator.next());
-
-export default localMoviesService;
+export { localMoviesService, externalMoviesService };

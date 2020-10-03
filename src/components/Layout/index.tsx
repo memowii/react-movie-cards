@@ -1,11 +1,11 @@
 import React from "react";
 import { Navbar } from "../Navbar";
 
-interface Layout {
+interface LayoutProps {
   children: JSX.Element;
 }
  
-export const Layout = (props: Layout) => (
+export const Layout = (props: LayoutProps) => (
   <React.Fragment>
     <Navbar />
     {props.children}
