@@ -47,6 +47,7 @@ class ExternalMovieService extends MovieService {
     const iterator = {
       from: 0,
       to: dividedMovies.length - 1,
+      length: itemsPerPage,
 
       [Symbol.iterator]() {
         this.current = this.from;
