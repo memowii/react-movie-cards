@@ -24,9 +24,13 @@ export const Home: React.FC = () => {
 
   return (
     <div className="container my-4">
-      <div className="row">
-        {!isOnline ? <LocalMovieCardsContainer /> : <ExternalMovieCardsContainer />}
-      </div>
+      {!isOnline ? (
+        <div className="row">
+          <LocalMovieCardsContainer />
+        </div>
+      ) : (
+        <ExternalMovieCardsContainer />
+      )}
     </div>
   );
 };
