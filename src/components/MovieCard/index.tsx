@@ -1,4 +1,3 @@
-import { IncomingMessage } from "http";
 import React from "react";
 
 import { StarRating } from "./../StarRating";

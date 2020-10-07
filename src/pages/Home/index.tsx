@@ -3,6 +3,10 @@ import React, { useState, useEffect } from "react";
 import { LocalMovieCardsContainer } from "../../components/LocalMovieCardsContainer";
 import { ExternalMovieCardsContainer } from "../../components/ExternalMovieCardsContainer";
 
+// I think this function will be better used when this app is a PWA.
+// Otherwise, when the app is used in offline mode, it won't give
+// the expected results, that it loads the LocalMovieCardsContainer
+// component.
 const checkOnlineStatus = async () => {
   try {
     const online = await fetch("/logo192.png");

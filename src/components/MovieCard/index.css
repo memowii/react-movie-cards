@@ -1,3 +1,7 @@
 .MovieCard {
   height: 100%;
 }
+
+.MovieCard .card-img-top {
+  height: 350px;
+}

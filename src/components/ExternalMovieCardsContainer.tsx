@@ -6,19 +6,17 @@ import { MovieCardWrapper } from "./MovieCardWrapper";
 import { externalMoviesService } from "../services/MovieService";
 
 const moviesIterator = externalMoviesService.getMoviesIterator(8);
-const __movies = moviesIterator.next().value;
+const initialMovies = moviesIterator.next().value;
 
 export const ExternalMovieCardsContainer = () => {
-  const [movies, setMovies] = useState(__movies);
+  const [movies, setMovies] = useState(initialMovies);
   const [hasMoreMovies, setHasMoreMovies] = useState(true);
 
   const getNextMovies = () => {
-    const _movies = moviesIterator.next();
-    if (!_movies.done) {
-      setMovies((prevMovies: any) => [...prevMovies, ..._movies.value]);
+    const nextMovies = moviesIterator.next();
+    if (!nextMovies.done) {
+      setMovies((prevMovies: any) => [...prevMovies, ...nextMovies.value]);
     } else {
-      console.log("no more movies", movies.length);
-
       setHasMoreMovies(false);
     }
   };
@@ -29,11 +27,6 @@ export const ExternalMovieCardsContainer = () => {
       next={getNextMovies}
       hasMore={hasMoreMovies}
       loader={<h4>Loading...</h4>}
-      endMessage={
-        <p style={{ textAlign: "center" }}>
-          <b>Yay! You have seen it all</b>
-        </p>
-      }
       className="row"
     >
       {movies.map((movie: any) => {

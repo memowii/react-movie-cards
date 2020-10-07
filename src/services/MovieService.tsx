@@ -10,10 +10,6 @@ abstract class MovieService {
 }
 
 class LocalMovieService extends MovieService {
-  constructor(movies: Movie[]) {
-    super(movies);
-  }
-
   getMovies(): Movie[] {
     return this.movies ? this.movies : [];
   }
@@ -69,6 +65,5 @@ class ExternalMovieService extends MovieService {
 
 const localMoviesService = new LocalMovieService(localMovies);
 const externalMoviesService = new ExternalMovieService(externalMovies as any[]);
-// const moviesIterator = externalMoviesService.getMoviesIterator(8);
 
 export { localMoviesService, externalMoviesService };
