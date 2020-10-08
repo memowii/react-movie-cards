@@ -15,6 +15,36 @@ class LocalMovieService extends MovieService {
   }
 }
 
+interface IteratorResult<T> {
+  done: boolean;
+  value: T;
+}
+
+class MovieIterator implements IterableIterator<Movie[]> {
+  private from: number = 0;
+  private to: number;
+  private current: number;
+  private movies: Movie[][];
+
+  constructor(movies: Movie[][]) {
+    this.movies = movies;
+    this.to = this.movies.length - 1;
+    this.current = this.from;
+  }
+
+  [Symbol.iterator](): IterableIterator<Movie[]> {
+    return this;
+  }
+
+  next(): IteratorResult<Movie[]> {
+    if (this.current <= this.to) {
+      return { done: false, value: this.movies[this.current++] };
+    } else {
+      return { done: true, value: null as any };
+    }
+  }
+}
+
 class ExternalMovieService extends MovieService {
   constructor(movies: Movie[] | any[]) {
     super(movies);
@@ -37,29 +67,9 @@ class ExternalMovieService extends MovieService {
     }));
   }
 
-  getMoviesIterator(itemsPerPage: number) {
-    const dividedMovies = chunk(this.movies, itemsPerPage);
-
-    const iterator = {
-      from: 0,
-      to: dividedMovies.length - 1,
-      length: itemsPerPage,
-
-      [Symbol.iterator]() {
-        this.current = this.from;
-        return this;
-      },
-
-      next() {
-        if (this.current <= this.to) {
-          return { done: false, value: dividedMovies[this.current++] };
-        } else {
-          return { done: true };
-        }
-      },
-    } as any;
-
-    return iterator[Symbol.iterator]();
+  getMoviesIterator(itemsPerPage: number): MovieIterator {
+    const chunkedMovies: Movie[][] = chunk(this.movies, itemsPerPage);
+    return new MovieIterator(chunkedMovies);
   }
 }
 

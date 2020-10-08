@@ -5,17 +5,19 @@ import { MovieCard } from "./MovieCard/index";
 import { MovieCardWrapper } from "./MovieCardWrapper";
 import { externalMoviesService } from "../services/MovieService";
 
+import { Movie } from "../interfaces/Movie";
+
 const moviesIterator = externalMoviesService.getMoviesIterator(8);
-const initialMovies = moviesIterator.next().value;
+const initialMovies: Movie[] = moviesIterator.next().value;
 
 export const ExternalMovieCardsContainer = () => {
-  const [movies, setMovies] = useState(initialMovies);
-  const [hasMoreMovies, setHasMoreMovies] = useState(true);
+  const [movies, setMovies] = useState<Movie[]>(initialMovies);
+  const [hasMoreMovies, setHasMoreMovies] = useState<boolean>(true);
 
-  const getNextMovies = () => {
+  const getNextMovies = (): void => {
     const nextMovies = moviesIterator.next();
     if (!nextMovies.done) {
-      setMovies((prevMovies: any) => [...prevMovies, ...nextMovies.value]);
+      setMovies((prevMovies: Movie[]) => [...prevMovies, ...nextMovies.value]);
     } else {
       setHasMoreMovies(false);
     }
