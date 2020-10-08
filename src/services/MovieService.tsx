@@ -63,8 +63,12 @@ class ExternalMovieService extends MovieService {
       description: movie.Plot,
       year: movie.Year,
       imageUrl: movie.Poster,
-      rating: movie.imdbRating,
+      rating: this.adjustImdbRating(movie.imdbRating),
     }));
+  }
+
+  private adjustImdbRating(rating: string): number {
+    return +rating > 5 ? +(+rating - 5).toFixed(1) : +rating;
   }
 
   getMoviesIterator(itemsPerPage: number): MovieIterator {

@@ -31,7 +31,7 @@ export const ExternalMovieCardsContainer = () => {
       loader={<h4>Loading...</h4>}
       className="row"
     >
-      {movies.map((movie: any) => {
+      {movies.map((movie: Movie) => {
         return (
           <React.Fragment key={movie.id}>
             <MovieCardWrapper>
@@ -41,7 +41,7 @@ export const ExternalMovieCardsContainer = () => {
                 title={movie.title}
                 subtitle={movie.subtitle}
                 description={movie.description}
-                rating={4.5}
+                rating={movie.rating}
               />
             </MovieCardWrapper>
           </React.Fragment>
